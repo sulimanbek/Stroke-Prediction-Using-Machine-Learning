@@ -1,85 +1,123 @@
-# Stroke Prediction Using Machine Learning 🧠🏥
+# Stroke Rate Prediction using Machine Learning 🧠📊
 
-This project applies **machine learning techniques** to predict the likelihood of a stroke based on patient health records.  
-The goal is to support **early risk detection** in healthcare using data-driven models.
+This project builds an **end-to-end machine learning pipeline** to predict stroke risk using patient healthcare data.  
+It focuses on **data preprocessing, exploratory data analysis (EDA), feature engineering, class imbalance handling, and model optimization**.
 
-The project was developed as part of an Artificial Intelligence course and focuses on **model performance, feature engineering, and medical insight extraction**.
+The final ensemble model achieves an **ROC-AUC score of 0.888**, highlighting the effectiveness of ML in early stroke risk detection.
 
 ---
 
-## 📌 Project Overview
+## Problem Statement
 
-- Dataset: ~20,000 patient records (healthcare data)
-- Target: Binary stroke prediction (stroke / no stroke)
-- Challenge: **Highly imbalanced dataset**
-- Outcome: Achieved **ROC-AUC score of 0.888**
+Stroke is a life-threatening medical condition where early detection can significantly improve outcomes.  
+Using structured healthcare data, this project aims to predict whether a patient is at risk of stroke based on demographic, lifestyle, and medical factors.
 
-Key risk factors identified:
+---
+
+##  Dataset
+
+- Source: Kaggle Healthcare Stroke Dataset
+- Rows: ~20,000 patients
+- Features: 12
+- Target: `stroke` (0 = No stroke, 1 = Stroke)
+- Challenge: **Severely imbalanced dataset**
+
+### Key Features
 - Age
-- BMI
-- Average glucose level
+- Gender
 - Hypertension
-- Heart disease
+- Heart Disease
+- BMI
+- Average Glucose Level
+- Smoking Status
+- Work Type
+- Residence Type
 
 ---
 
-## 🧠 Machine Learning Models Used
-
-- Logistic Regression
-- Naïve Bayes
-- Decision Tree
-- Random Forest
-- K-Nearest Neighbors (KNN)
-- Support Vector Classification (SVC)
-- **LightGBM**
-- **XGBoost**
-- Ensemble modeling (optimized)
-
----
-
-## ⚙️ Methodology
+## ⚙️ Project Pipeline
 
 ### 1️⃣ Data Preprocessing
-- Handling missing values
+- Missing value handling
 - One-hot encoding for categorical variables
-- Feature binning for visualization
-- Class imbalance handling via **upsampling**
+- Feature binning for analysis
+- Dataset splitting (`train.csv`, `test.csv`)
+- **Upsampling** of minority class (stroke)
 
 ### 2️⃣ Exploratory Data Analysis (EDA)
 - Stroke distribution analysis
-- Feature vs stroke visualizations
-- KDE plots for age, BMI, glucose level
-- Gender & lifestyle factor analysis
+- Stroke rate by age group
+- Gender vs stroke rate
+- Hypertension & heart disease impact
+- BMI & glucose level visualization
+- KDE plots for age distributions
 
 ### 3️⃣ Feature Engineering
-Custom features created:
+Custom engineered features:
 - `age / bmi`
 - `age * bmi`
 - `bmi / prime`
 - `obesity`
 - `blood_heart`
 
-### 4️⃣ Modeling & Evaluation
+These features improved model performance and interpretability.
+
+### 4️⃣ Modeling
+Models explored:
+- Logistic Regression
+- Naïve Bayes
+- Decision Tree
+- **Random Forest**
+- KNN
+- SVM
+- **LightGBM**
+- **XGBoost**
+
+Final approach:
 - Hyperparameter tuning
-- ROC-AUC as the main evaluation metric
-- Ensemble model for final prediction
+- **Ensemble modeling**
+- Evaluation using ROC-AUC
 
 ---
 
 ## 📊 Results
 
 | Model | ROC-AUC |
-|------|--------|
+|-----|--------|
 | Baseline LightGBM | ~0.84 |
-| Optimized Ensemble | **0.888** |
+| Optimized Ensemble (LGBM + XGB) | **0.888** |
 
-Feature importance analysis showed **age, BMI, and glucose level** as the most influential predictors.
+### Most Influential Features
+- Age
+- BMI
+- Average Glucose Level
+- Hypertension
+- Heart Disease
 
 ---
 
-## 📁 Project Structure
-├── notebook.ipynb # Full EDA, preprocessing, modeling
-├── report.pdf # Academic report (methodology & results)
-├── data/ # Dataset (Kaggle source)
-├── figures/ # EDA plots and visualizations
+## 📁 Repository Structure
+├── train.csv # Training dataset
+├── test.csv # Test dataset
+├── sample_submission.csv # Kaggle-style submission format
+├── healthcare-dataset-stroke-data.csv
+├── Stroke Rate Prediction.ipynb 
 └── README.md
+
+How to Run the Script
+
+Ensure you have all the required libraries installed. These include:
+
+numpy
+matplotlib
+seaborn
+sklearn
+lightgbm
+xgboost
+pandas
+Load the required datasets. The script expects two datasets:
+
+A training dataset ('./realifeDataSets/train.csv')
+A test dataset ('./realifeDataSets/test.csv')
+A real world dataset ('./healthcare-dataset-stroke-data.csv')
+Run the Python script. You can do this in a Python environment or Jupyter notebook. The script will load the data, preprocess it, perform exploratory data analysis, and then apply and evaluate several machine learning models.
